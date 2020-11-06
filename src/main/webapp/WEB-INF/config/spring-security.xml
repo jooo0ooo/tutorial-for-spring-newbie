@@ -21,17 +21,22 @@
 		<security:intercept-url pattern="/" access="permitAll"/>
 		<security:intercept-url pattern="/member" access="hasRole('ROLE_MEMBER')"/>
 		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
-		<security:form-login login-page="/user/login"
+		<security:form-login
+			login-page="/user/login"
 			username-parameter="email"
 			login-processing-url="/user/login-processing"
 			default-target-url="/"/>
 			
 			<!-- 최대 한 개의 세션만 생성되도록 -->
 		<security:session-management invalid-session-url="/user/login">
-            <security:concurrency-control max-sessions="1"
-            							  expired-url="/user/login"
-            							  error-if-maximum-exceeded="true" />
-        </security:session-management>
+			<security:concurrency-control max-sessions="1"
+				expired-url="/user/login"
+				error-if-maximum-exceeded="true" />
+		</security:session-management>
+		
+		<security:logout
+			logout-url="/logout"
+			logout-success-url="/"/>
 	</security:http>
 	
 	<!--security:authentication-manager>	
@@ -53,6 +58,5 @@
   	<security:password-encoder hash="bcrypt"/>
   </security:authentication-provider>
 </security:authentication-manager>
-	
 
 </beans>

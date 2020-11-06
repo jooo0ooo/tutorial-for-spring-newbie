@@ -11,5 +11,12 @@
 	I Seoul U!
 </h1>
 <p>  ID is ${id}. k.k </p>
+<p>Are you login? -> ${isLogin}</p>
+
+<form id="logout" action="/logout" method="POST">
+	<input type="submit" value="로그아웃"/>
+   <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+</form>
+
 </body>
 </html>
