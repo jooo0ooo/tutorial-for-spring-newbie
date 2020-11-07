@@ -15,14 +15,11 @@
 </head>
 <body>
 <div id="wrapper">
-	<div id="header">
-		<tiles:insertAttribute name="header" />
-	</div>
 	<div id="content">
 		<tiles:insertAttribute name="content" />
 	</div>
-	<div id="footer">
-		<tiles:insertAttribute name="footer" />
+	<div id="nav">
+		<tiles:insertAttribute name="nav" />
 	</div>
 </div>
 <form:form id="logout-form" action="/logout" method="POST"></form:form>
