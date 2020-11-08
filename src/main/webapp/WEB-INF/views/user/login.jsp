@@ -54,6 +54,9 @@ a {
 </style>
 <body class="bg-gradient-primary">
 <div class="card o-hidden border-0 shadow-lg my-5">
+
+
+
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
@@ -79,6 +82,7 @@ a {
                                         </div>
                                         <input class="btn btn-primary btn-user btn-block" type="submit" value="Login">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                        ${requestScope.loginFailMsg}
                                     </form:form>
                                     <hr>
                                     <div class="text-center forgot-btn">

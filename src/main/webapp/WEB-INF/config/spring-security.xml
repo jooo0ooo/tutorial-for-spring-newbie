@@ -16,6 +16,7 @@
 	
 	<bean id="customUserService" class="com.joo.tutorial.config.UserDetailsService" />
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<bean id="loginFailureHandler" class="com.joo.tutorial.auth.LoginFailureHandler"></bean>
 	
 	<security:http>
 		<security:intercept-url pattern="/" access="permitAll"/>
@@ -25,8 +26,9 @@
 			login-page="/user/login"
 			username-parameter="email"
 			login-processing-url="/user/login-processing"
-			default-target-url="/"/>
-			
+			default-target-url="/"
+			authentication-failure-handler-ref="loginFailureHandler"/>
+
 			<!-- 최대 한 개의 세션만 생성되도록 -->
 		<security:session-management invalid-session-url="/user/login">
 			<security:concurrency-control max-sessions="1"
