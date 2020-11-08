@@ -34,13 +34,13 @@
 #drawer-btn {
 	position: fixed;
 	top: 5px;
-	right: 5px;
+	/*right: 5px;*/
 	cursor: pointer;
 	transition: .5s;
 	
 	border: 0;
 	outline: 0;
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0);
 }
 
 #drawer-btn div {
@@ -58,14 +58,13 @@
 #drawerInput:checked ~ #drawer-btn {
 	right: 205px;
 }
-
 #drawerInput:checked ~ #drawer-btn::before {
 	content: '';
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
+	top: -5000px;
+	left: -5000px;
+	width: 100000px;
+	height: 100000px;
 	background: rgba(0, 0, 0, .25);
 }
 
@@ -94,12 +93,8 @@
 	z-index: 10;
 }
 
-#drawerInput:checked ~ #drawer {
+#drawerInput:checked ~ #drawer{
 	transform: translateX(-200px);
-}
-
-#drawer .drawer-menu {
-	
 }
 
 #drawer a:last-child {
@@ -128,17 +123,4 @@
 	<a href="#" class="drawer-menu">Item 4</a>
 </nav>
 <script>
-$('#drawer-btn').on('click', function() {
-	if($("input:checkbox[id='drawerInput']").is(":checked")) {
-		$("input:checkbox[id='drawerInput']").prop("checked", false);
-		//$('#content').css("transform", "translateX(0)");
-		
-	} else {
-		$("input:checkbox[id='drawerInput']").prop("checked", true);
-		//$('#content').css("transform", "translateX(-200px)");
-	}
-
-	
-	
-});
 </script>
