@@ -82,7 +82,7 @@ a {
                                         </div>
                                         <input class="btn btn-primary btn-user btn-block" type="submit" value="Login">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                        ${requestScope.loginFailMsg}
+                                        
                                     </form:form>
                                     <hr>
                                     <div class="text-center forgot-btn">
@@ -121,6 +121,13 @@ a {
 	}
 	
 });
+    	
+    	var loginFailMsg = '${requestScope.loginFailMsg}';
+    	if(loginFailMsg) {
+    		toastr.error('${requestScope.loginFailMsg}', 'Login Failed');
+    	}
+    	
+    	
     </script>
 </body>
 </html>

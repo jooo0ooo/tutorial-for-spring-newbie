@@ -38,7 +38,7 @@
 		
 		<security:logout
 			logout-url="/logout"
-			logout-success-url="/"/>
+			logout-success-url="/user/login"/>
 	</security:http>
 	
 	<!--security:authentication-manager>	

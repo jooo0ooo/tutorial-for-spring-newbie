@@ -15,12 +15,14 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <link href="${context}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="${context}/resources/css/swiper.min.css" rel="stylesheet">
+<link href="${context}/resources/css/toastr.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <script src="${context}/resources/js/jquery-3.5.1.min.js"></script>
 <script src="${context}/resources/js/bootstrap.min.js"></script>
 <script src="${context}/resources/js/sb-admin-2.min.js"></script>
 <script src="${context}/resources/js/swiper.min.js"></script>
+<script src="${context}/resources/js/toastr.min.js"></script>
 </head>
 <body>
 <div class="container">
