@@ -19,6 +19,8 @@
 	<bean id="loginFailureHandler" class="com.joo.tutorial.auth.LoginFailureHandler"></bean>
 	
 	<security:http>
+		<security:csrf disabled="true"/>
+	
 		<security:intercept-url pattern="/" access="permitAll"/>
 		<security:intercept-url pattern="/member" access="hasRole('ROLE_MEMBER')"/>
 		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
