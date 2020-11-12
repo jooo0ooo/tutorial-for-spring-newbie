@@ -30,13 +30,6 @@
 			login-processing-url="/user/login-processing"
 			default-target-url="/"
 			authentication-failure-handler-ref="loginFailureHandler"/>
-
-			<!-- 최대 한 개의 세션만 생성되도록 -->
-		<security:session-management invalid-session-url="/user/login">
-			<security:concurrency-control max-sessions="1"
-				expired-url="/user/login"
-				error-if-maximum-exceeded="true" />
-		</security:session-management>
 		
 		<security:logout
 			logout-url="/logout"
