@@ -121,6 +121,7 @@
 	<a href="#" class="drawer-menu">Item 2</a>
 	<a href="#" class="drawer-menu">Item 3</a>
 	<a href="#" class="drawer-menu">Item 4</a>
+	<a href="#" class="drawer-menu logout">Logout</a>
 </nav>
 <script>
 </script>
