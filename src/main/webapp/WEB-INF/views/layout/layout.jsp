@@ -23,6 +23,8 @@
 <script src="${context}/resources/js/sb-admin-2.min.js"></script>
 <script src="${context}/resources/js/swiper.min.js"></script>
 <script src="${context}/resources/js/toastr.min.js"></script>
+<script src="${context}/resources/js/jquery.bpopup.min.js"></script>
+
 </head>
 <body>
 <div class="container">
