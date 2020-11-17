@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joo.tutorial.spring.mapper.AccountInfoMapper">
+	
+	<select id="getAccountCountByUserSeq" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM account_info
+		WHERE user_seq = #{userSeq}
+	</select>
+	
+	<insert id="insertAccount" parameterType="AccountInfo">
+		INSERT INTO account_info 
+			(
+				account_num,
+				user_seq,
+				password,
+				alias,
+				sort_order
+			)
+		VALUES
+			(
+				#{accountNum},
+				#{userSeq},
+				#{password},
+				#{alias},
+				#{sortOrder}
+			)
+	</insert>
+	
+	<select id="getAccountInfoByAccountNum" parameterType="String" resultType="AccountInfo">
+		SELECT *
+		FROM account_info
+		WHERE account_num = #{accountNum}
+	</select>
+	
+</mapper>

@@ -17,6 +17,7 @@
 <link href="${context}/resources/css/swiper.min.css" rel="stylesheet">
 <link href="${context}/resources/css/toastr.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="${context}/resources/css/animate.min.css" rel="stylesheet">
 
 <script src="${context}/resources/js/jquery-3.5.1.min.js"></script>
 <script src="${context}/resources/js/bootstrap.min.js"></script>
@@ -41,6 +42,10 @@ $('.logout').on('click', function() {
 	event.preventDefault();
 	$('#logout-form').submit();
 });
+
+toastr.options = {
+	"positionClass": "toast-top-full-width"
+}
 </script>
 </body>
 </html>
