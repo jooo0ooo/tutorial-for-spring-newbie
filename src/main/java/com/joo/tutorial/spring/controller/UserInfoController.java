@@ -12,12 +12,13 @@ import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.service.UserInfoService;
 
 @Controller
+@RequestMapping("/user")
 public class UserInfoController {
 	
 	@Autowired
 	UserInfoService userInfoService;
 	
-	@RequestMapping(value = "/user/login")
+	@RequestMapping(value = "/login")
 	public void loginPage(String error, String logout, Model model) {
 		
 		if(error != null) { 
@@ -27,25 +28,27 @@ public class UserInfoController {
 			model.addAttribute("logout","로그아웃"); 
 		}
 		
-		System.out.println(error);
-		System.out.println(logout);
-		System.out.println("??????????????????????????????");
 		
 	}
 	
-	@PostMapping("/user/login-processing")
+	@PostMapping("/login-processing")
 	public void loginProcessing(String error) {
 		System.out.println("????????????????????????");
 		System.out.println(error);
 	}
 	
+	@GetMapping("/login-processing")
+	public String loginProcessing() {
+		return "redirect:/user/login";
+	}
 	
-	@GetMapping("/user/register")
+	
+	@GetMapping("/register")
 	public String register() {
 		return "/user/register";
 	}
 	
-	@PostMapping("/user/register")
+	@PostMapping("/register")
 	public String registerProcess(UserInfo users) {
 		
 		if (userInfoService.register(users)) {
