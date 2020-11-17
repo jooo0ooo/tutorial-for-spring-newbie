@@ -40,4 +40,10 @@
 		WHERE user_seq = #{userSeq}
 	</select>
 	
+	<select id="getCardInfoByAccountNum" parameterType="String" resultType="CardInfo">
+		SELECT *
+		FROM card_info
+		WHERE account_num = #{accountNum}
+	</select>
+	
 </mapper>

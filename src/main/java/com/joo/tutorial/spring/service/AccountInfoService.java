@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.joo.tutorial.bean.AccountInfo;
+import com.joo.tutorial.bean.CardInfo;
 import com.joo.tutorial.spring.mapper.AccountInfoMapper;
 
 @Service
@@ -19,8 +20,16 @@ public class AccountInfoService {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	public List<AccountInfo> getAllAcountInfoByUserSeq(int userSeq) {
-		return mapper.getAllAcountInfoByUserSeq(userSeq);
+	public List<AccountInfo> getAllAcountNCardInfoByUserSeq(int userSeq) {
+		
+		List<AccountInfo> accountList = mapper.getAllAcountInfoByUserSeq(userSeq);
+		
+		for(AccountInfo account : accountList) {
+			CardInfo card = mapper.getCardInfoByAccountNum(account.getAccountNum());
+			account.setCardInfo(card);
+		}
+		
+		return accountList;
 	}
 	
 	public synchronized AccountInfo makeAccount(AccountInfo account) {

@@ -195,7 +195,18 @@ html {
 									<div class="slide-content account-slide">
 										<span class="slide-children" style="color: #3a3939;">${item.alias } INFO</span><br>
 										<span class="slide-children" style="color: #af48af;">${item.accountNum }</span><br>
-										<span class="slide-children" style="color: #de7c8e;">Linked Card <span style="color: red;">X</span></span><br>
+										<span class="slide-children" style="color: #de7c8e;">
+											Linked Card 											
+											<c:choose>
+												<c:when test="${!empty item.cardInfo}">
+													<span style="color: green;">O</span>
+												</c:when>
+												<c:otherwise>
+													<span style="color: red;">X</span>
+												</c:otherwise>
+											</c:choose>
+											
+										</span><br>
 										<span class="slide-children" style="color: #2697c5;">
 											Account Security 
 											<c:choose>

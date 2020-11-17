@@ -17,5 +17,7 @@ public class AccountInfo {
 	boolean securityActive;
 	Date createDt;
 	Date updateDt;
+	
+	CardInfo cardInfo;
 
 }

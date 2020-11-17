@@ -28,10 +28,9 @@ public class HomeController {
 		UserInfo user = SessionUtil.getSession();
 		
 		if(user != null) {
-			List<AccountInfo> accountList = accountInfoService.getAllAcountInfoByUserSeq(user.getSeq());
+			List<AccountInfo> accountList = accountInfoService.getAllAcountNCardInfoByUserSeq(user.getSeq());
 			mav.addObject("accountList", accountList);
 		}
-		
 		
 		return mav;
 
