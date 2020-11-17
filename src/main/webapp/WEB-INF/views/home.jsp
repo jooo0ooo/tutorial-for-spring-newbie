@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/HTML;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -81,12 +82,8 @@ a {
     line-height: 6rem;
     border: 2px solid #ececec;
     border-radius: 7rem;
-    margin-top: 15px;
+    margin: 5px 0;
     cursor: pointer;
-}
-
-.slide-content {
-	line-height: 100px;
 }
 
 ::-webkit-scrollbar { display: none; }
@@ -169,6 +166,17 @@ html {
 .toast-message {
 	font-size: 15px;
 }
+
+.account-slide {
+	line-height: 2rem;
+	font-size: 1.3rem;
+	text-align: center;
+	color: black;
+}
+
+.slide-children {
+	font-weight: bold;
+}
 </style>
 <body class="bg-gradient-primary">
 <div class="card o-hidden border-0 shadow-lg my-5">
@@ -182,12 +190,29 @@ html {
 					
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
+							<c:forEach var="item" items="${accountList}">
+								<div class="swiper-slide">
+									<div class="slide-content account-slide">
+										<span class="slide-children" style="color: #3a3939;">${item.alias } INFO</span><br>
+										<span class="slide-children" style="color: #af48af;">${item.accountNum }</span><br>
+										<span class="slide-children" style="color: #de7c8e;">Linked Card <span style="color: red;">X</span></span><br>
+										<span class="slide-children" style="color: #2697c5;">
+											Account Security 
+											<c:choose>
+												<c:when test="${item.securityActive eq true}">
+													<span style="color: green;">O</span>
+												</c:when>
+												<c:otherwise>
+													<span style="color: red;">X</span>
+												</c:otherwise>
+											</c:choose>
+										</span>
+									</div>
+								</div>
+							</c:forEach>
 							<div class="swiper-slide">
 								<div id="no-account" class="slide-content">+</div>
 							</div>
-							<div class="swiper-slide"><div class="slide-content">내용2</div></div>
-							<div class="swiper-slide"><div class="slide-content">내용3</div></div>
-							<div class="swiper-slide"><div class="slide-content">내용4</div></div>
 						</div>
 						<div class="swiper-button-next"></div>
 						<div class="swiper-button-prev"></div>
@@ -295,9 +320,9 @@ html {
 			</div>
 		</div>
 		
-		<div><label>계좌 별명</label></div>
+		<div><label>계좌 별명 (8글자까지)</label></div>
 		<div class="input-group mb-3">
-			<input type="text" class="form-control account-input" placeholder="Account Alias" name="account-alias">
+			<input type="text" class="form-control account-input" placeholder="Account Alias" name="account-alias" maxlength="8">
 		</div>
 		
 		<div><label>계좌 비밀번호</label></div>

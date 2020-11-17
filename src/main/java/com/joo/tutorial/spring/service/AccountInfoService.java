@@ -1,16 +1,14 @@
 package com.joo.tutorial.spring.service;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.joo.tutorial.bean.AccountInfo;
-import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.mapper.AccountInfoMapper;
-import com.joo.tutorial.spring.mapper.UserInfoMapper;
-import com.joo.tutorial.util.StringUtil;
 
 @Service
 public class AccountInfoService {
@@ -20,6 +18,10 @@ public class AccountInfoService {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	public List<AccountInfo> getAllAcountInfoByUserSeq(int userSeq) {
+		return mapper.getAllAcountInfoByUserSeq(userSeq);
+	}
 	
 	public synchronized AccountInfo makeAccount(AccountInfo account) {
 		

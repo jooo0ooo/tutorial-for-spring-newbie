@@ -34,4 +34,10 @@
 		WHERE account_num = #{accountNum}
 	</select>
 	
+	<select id="getAllAcountInfoByUserSeq" parameterType="int" resultType="AccountInfo">
+		SELECT *
+		FROM account_info
+		WHERE user_seq = #{userSeq}
+	</select>
+	
 </mapper>
