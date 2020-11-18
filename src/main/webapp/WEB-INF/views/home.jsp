@@ -130,7 +130,7 @@ html {
 	}
 }
 
-#create-account-modal { 
+.main-modal { 
 	background-color:#fff;
 	border-radius:15px;
 	color:#000;
@@ -141,6 +141,7 @@ html {
 	min-height: 180px;
 	font-size: 15px;
 }
+
 .b-close{
 	cursor:pointer;
 	position:absolute;
@@ -176,6 +177,29 @@ html {
 
 .slide-children {
 	font-weight: bold;
+}
+
+.account-slide {
+	cursor: pointer;
+}
+
+.detail-info {
+	float: right;
+}
+
+.detail-line {
+	margin: 0;
+}
+
+.card-header {
+	text-align: center;
+}
+
+.detail-edit-btn {
+	color: blue;
+	text-decoration: underline;
+	font-size: small;
+	cursor: pointer;
 }
 </style>
 <body class="bg-gradient-primary">
@@ -218,6 +242,7 @@ html {
 												</c:otherwise>
 											</c:choose>
 										</span>
+										<input class="account-info" value='${item.totalData }' type="hidden">
 									</div>
 								</div>
 							</c:forEach>
@@ -315,7 +340,7 @@ html {
 	</div>
 </div>
 
-<div id="create-account-modal">
+<div id="create-account-modal" class="main-modal">
 	<a class="b-close">x</a>
 	<div>
 		<div><label>희망 계좌 번호 뒷자리</label></div>
@@ -340,11 +365,59 @@ html {
 		<div class="input-group mb-3">
 			<input type="password" class="form-control account-input" placeholder="Account Password" name="account-password" disabled>
 			<div class="input-group-append">
-			
 				<button id="input-password-btn" class="btn btn-outline-secondary account-input" type="button">Input</button>
 			</div>
 		</div>
 		<button type="button" id="create-account-btn" class="btn btn-outline-primary">Create!</button>
+	</div>
+</div>
+
+<div id="account-detail-modal" class="main-modal">
+	<a class="b-close">x</a>
+	<div>
+	
+<div class="card shadow">
+	<div class="card-header py-3">
+		<h4 class="m-0 font-weight-bold text-primary">Account Info</h4>
+	</div>
+	<div class="card-body">
+		<p class="detail-line">Account Number : <span id="detail-account-num" class="detail-info"></span></p>
+		<p class="detail-line" id="account-alias-original">Account Alias : <span class="detail-info">&nbsp;<span id="alias-edit-btn" class="detail-edit-btn">edit</span></span><span id="detail-account-alias" class="detail-info"></span></p>
+		<div class="detail-line" id="account-alias-edit" style="display: none;">
+			Account Alias :
+			<div class="input-group" style="margin: 0!important; display: inline-block; width: unset;">
+			
+				<input id="edit-alias-input"style="width: 79%; height: 30px; line-height: 0;" type="text" class="form-control" placeholder="New Alias" maxlength="8">
+				<div class="input-group-append" style="display: inline-block;">
+					<button style="height: 30px; line-height: 0;" id="edit-alias-btn" class="btn btn-outline-secondary" type="button">Set</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="card-detail" class="card shadow">
+	<div class="card-header py-3">
+		<h4 class="m-0 font-weight-bold text-primary">Card Info</h4>
+	</div>
+	<div class="card-body">
+		<p class="detail-line">Card Number : <span id="detail-card-num" class="detail-info">33330512345</span></p>
+		<p class="detail-line">Card CreateDt : <span id="detail-card-create-dt" class="detail-info">2020/11/17</span></p>
+		<p class="detail-line">Card ExpireDt : <span id="detail-card-expire-dt" class="detail-info">2025/11/17</span></p>
+	</div>
+</div>
+<div id="no-card" class="card shadow">
+	<div class="card-body">
+		<p class="detail-line">Linked Card : <span id="create-card-btn" class="detail-info">&nbsp;<span class="detail-edit-btn">create</span></span><span class="detail-info" style="color: red; font-weight: bold;">X</span></p>
+	</div>
+</div>
+<div class="card shadow">
+	<div class="card-body">
+		<p class="detail-line">Account & Card Maximum : <span id="detail-account-max" class="detail-info"></span></p>
+		<p class="detail-line">Security Setting : <span id="security-upgrade-btn" style="display:none;" class="detail-info">&nbsp;<span class="detail-edit-btn">upgrade</span></span><span id="detail-account-security" class="detail-info"></span></p>
+	</div>
+</div>
+		
 	</div>
 </div>
 <jsp:include page="common/password.jsp"/>
@@ -477,6 +550,84 @@ $('#create-account-btn').click(function(){
 			}
 		}
 	});
+});
+
+
+$('.account-slide').bind('click', function(e) {
+	e.preventDefault();
+	
+	var data = JSON.parse($(this).children('input').val());
+	
+	$('#detail-account-num').text(data.accountNum);
+	$('#detail-account-alias').text(data.alias);
+	
+	if (data.hasOwnProperty('card')) {
+		$('#card-detail').hide();
+		$('#detail-card-num').text(data.card.cardNum);
+		$('#detail-card-create-dt').text(data.card.cardCreateDt);
+		$('#detail-card-expire-dt').text(data.card.cardExpireDt);
+	} else {
+		$('#card-detail').hide();
+	}
+	
+	
+	/*
+	
+	*/
+	$('#detail-account-max').text('');
+	
+	if (data.securityActive + '' == 'false') {
+		$('#security-upgrade-btn').show();
+		$('#detail-account-security').text("X");
+		$('#detail-account-security').css({
+			color: "red",
+			fontWeight: "bold"
+		});
+	} else {
+		$('#detail-account-security').text("O");
+		$('#detail-account-security').css({
+			color: "green",
+			fontWeight: "bold"
+		});
+	}
+	
+	$('#account-detail-modal').bPopup({
+		
+	});
+});
+
+$('#alias-edit-btn').click(function(){
+	$('#account-alias-edit').show();
+	$('#account-alias-original').hide();
+});
+$('#edit-alias-btn').click(function(){
+	
+	if (!$('#edit-alias-input').val()) {
+		toastr.error('변경할 계좌 별명을 입력해 주십시오.');
+		return;
+	}
+	
+	var newAlias = $('#edit-alias-input').val(),
+		accountNum = $(this).parent().parent().parent().prev().prev().children('span').text();
+	
+	$.ajax({
+		url : "${context}/account/update",
+		method : "POST",
+		data : {"alias" : newAlias, "accountNum" : accountNum},
+		success : function(result) {
+			if (result == true) {
+				toastr.info('계좌 별명을 변경하였습니다.');
+				$('#account-alias-edit').hide();
+				$('#account-alias-original').show();
+				$('#detail-account-alias').text(newAlias);
+			} else {
+				toastr.error('계좌 별명 변경이 실패하였습니다. 다시 시도해주시길 바랍니다.');
+			}
+		}
+	});
+	
+	$('#edit-alias-input').val('');
+	
 });
 </script>
 </body>

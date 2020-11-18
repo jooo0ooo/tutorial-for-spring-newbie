@@ -1,5 +1,6 @@
 package com.joo.tutorial.spring.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.joo.tutorial.bean.AccountInfo;
@@ -13,4 +14,6 @@ public interface AccountInfoMapper {
 	
 	public List<AccountInfo> getAllAcountInfoByUserSeq(int userSeq);
 	public CardInfo getCardInfoByAccountNum(String accountNum);
+	
+	public int updateAccount(HashMap<String, Object> param);
 }

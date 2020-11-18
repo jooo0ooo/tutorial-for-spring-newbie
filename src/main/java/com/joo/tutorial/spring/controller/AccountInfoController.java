@@ -50,4 +50,10 @@ public class AccountInfoController {
 		
 	}
 	
+	@PostMapping("/update")
+	@ResponseBody
+	public boolean update(String alias, String accountNum) {
+		return accountInfoService.updateAccount(alias, accountNum);
+	}
+	
 }

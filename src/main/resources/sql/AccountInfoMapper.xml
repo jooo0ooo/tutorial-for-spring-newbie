@@ -46,4 +46,10 @@
 		WHERE account_num = #{accountNum}
 	</select>
 	
+	<update id="updateAccount" parameterType="HashMap">
+		UPDATE account_info
+		SET alias = #{alias}
+		WHERE account_num = #{accountNum}
+	</update>
+	
 </mapper>

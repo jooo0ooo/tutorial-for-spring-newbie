@@ -1,12 +1,14 @@
 package com.joo.tutorial.spring.service;
 
 import java.security.SecureRandom;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.joo.tutorial.bean.AccountInfo;
 import com.joo.tutorial.bean.CardInfo;
 import com.joo.tutorial.spring.mapper.AccountInfoMapper;
@@ -27,9 +29,20 @@ public class AccountInfoService {
 		for(AccountInfo account : accountList) {
 			CardInfo card = mapper.getCardInfoByAccountNum(account.getAccountNum());
 			account.setCardInfo(card);
+			Gson gson = new Gson();
+			account.setTotalData(gson.toJson(account));
 		}
 		
 		return accountList;
+	}
+	
+	public boolean updateAccount(String alias, String accountNum) {
+		HashMap<String, Object> param = new HashMap<>();
+		param.put("alias", alias);
+		param.put("accountNum", accountNum);
+		
+		return mapper.updateAccount(param) > 0;
+		
 	}
 	
 	public synchronized AccountInfo makeAccount(AccountInfo account) {

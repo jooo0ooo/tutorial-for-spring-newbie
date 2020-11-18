@@ -19,5 +19,7 @@ public class AccountInfo {
 	Date updateDt;
 	
 	CardInfo cardInfo;
+	
+	String totalData;
 
 }
