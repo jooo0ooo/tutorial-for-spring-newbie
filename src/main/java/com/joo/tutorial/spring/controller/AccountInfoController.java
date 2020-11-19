@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.joo.tutorial.bean.AccountInfo;
+import com.joo.tutorial.bean.CardInfo;
 import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.service.AccountInfoService;
 import com.joo.tutorial.spring.service.UserInfoService;
@@ -56,4 +58,19 @@ public class AccountInfoController {
 		return accountInfoService.updateAccount(alias, accountNum);
 	}
 	
+	@PostMapping("/create/card")
+	@ResponseBody
+	public String createCard(String accountNum) {
+		
+		CardInfo card = accountInfoService.getCardInfoByAccountNum(accountNum);
+		Gson gson = new Gson();
+		
+		if (card != null) {
+			return gson.toJson(card);
+		} else {
+			CardInfo newCard = accountInfoService.makeCard(accountNum);
+			return gson.toJson(newCard);
+		}
+		
+	}
 }

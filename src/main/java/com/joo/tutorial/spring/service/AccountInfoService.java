@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.joo.tutorial.bean.AccountInfo;
 import com.joo.tutorial.bean.CardInfo;
+import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.mapper.AccountInfoMapper;
+import com.joo.tutorial.util.SessionUtil;
 
 @Service
 public class AccountInfoService {
@@ -103,6 +105,32 @@ public class AccountInfoService {
     	return "MJ" + String.format("%02d", checkCode) + customNum;
 	}
 	
+	private String generateCardNumInGeneralFormat(String accountNum, String phone) {
+		
+		int accountCheckCodeFirstDigit = Integer.parseInt(accountNum.substring(2, 3));
+		int accountCheckCodeSecondDigit = Integer.parseInt(accountNum.substring(3, 4));
+		
+		int phoneHeadLastNum = Integer.parseInt(phone.substring(5, 6));
+		int phoneBodyNum = Integer.parseInt(phone.substring(6).replace("-", ""));
+		int phoneCheckCode = 0;
+		
+		for (int i = 0; i < 8; i++) {
+			phoneCheckCode += phoneBodyNum % 10;
+			phoneBodyNum /= 10;
+		}
+		
+		int phoneCheckCodeFirstDigit = phoneCheckCode / 10;
+		int phoneCheckCodeSecondDigit = phoneCheckCode % 10;
+		
+		int cardCheckCode = 10 - ((36 + accountCheckCodeFirstDigit * 2 + accountCheckCodeSecondDigit 
+				+ phoneCheckCodeFirstDigit * 2 + phoneCheckCodeSecondDigit 
+				+ phoneHeadLastNum * 2) % 10);
+		
+		return "9000" + accountCheckCodeFirstDigit + accountCheckCodeSecondDigit 
+				+ phoneCheckCodeFirstDigit + phoneCheckCodeSecondDigit 
+				+ "221901" + phoneHeadLastNum + cardCheckCode;
+	}
+	
 	public boolean isExistAccountNum(String accountNum) {
 		
 		if(accountNum.length() == 6) {
@@ -117,6 +145,22 @@ public class AccountInfoService {
 			return false;
 		}
 		
+	}
+	
+	public CardInfo makeCard(String accountNum) {
+		
+		CardInfo card = new CardInfo();
+		card.setCardNum(generateCardNumInGeneralFormat(accountNum, SessionUtil.getSession().getPhone()));
+		card.setUserSeq(SessionUtil.getUserSeq());
+		card.setAccountNum(accountNum);
+		
+		mapper.insertCard(card);
+		
+		return mapper.getCardInfoByAccountNum(accountNum);
+	}
+	
+	public CardInfo getCardInfoByAccountNum(String accountNum) {
+		return mapper.getCardInfoByAccountNum(accountNum);
 	}
 	
 }

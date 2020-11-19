@@ -217,16 +217,16 @@ html {
 							<c:forEach var="item" items="${accountList}">
 								<div class="swiper-slide">
 									<div class="slide-content account-slide">
-										<span class="slide-children" style="color: #3a3939;">${item.alias } INFO</span><br>
+										<span id="account-alias" class="slide-children" style="color: #3a3939;">${item.alias } INFO</span><br>
 										<span class="slide-children" style="color: #af48af;">${item.accountNum }</span><br>
 										<span class="slide-children" style="color: #de7c8e;">
 											Linked Card 											
 											<c:choose>
 												<c:when test="${!empty item.cardInfo}">
-													<span style="color: green;">O</span>
+													<span id="linked-card-exist" style="color: green;">O</span>
 												</c:when>
 												<c:otherwise>
-													<span style="color: red;">X</span>
+													<span id="linked-card-exist" style="color: red;">X</span>
 												</c:otherwise>
 											</c:choose>
 											
@@ -235,10 +235,10 @@ html {
 											Account Security 
 											<c:choose>
 												<c:when test="${item.securityActive eq true}">
-													<span style="color: green;">O</span>
+													<span id="security-status" style="color: green;">O</span>
 												</c:when>
 												<c:otherwise>
-													<span style="color: red;">X</span>
+													<span id="security-status" style="color: red;">X</span>
 												</c:otherwise>
 											</c:choose>
 										</span>
@@ -386,8 +386,7 @@ html {
 		<div class="detail-line" id="account-alias-edit" style="display: none;">
 			Account Alias :
 			<div class="input-group" style="margin: 0!important; display: inline-block; width: unset;">
-			
-				<input id="edit-alias-input"style="width: 79%; height: 30px; line-height: 0;" type="text" class="form-control" placeholder="New Alias" maxlength="8">
+				<input id="edit-alias-input"style="width: 75%; height: 30px; line-height: 0;" type="text" class="form-control" placeholder="New Alias" maxlength="8">
 				<div class="input-group-append" style="display: inline-block;">
 					<button style="height: 30px; line-height: 0;" id="edit-alias-btn" class="btn btn-outline-secondary" type="button">Set</button>
 				</div>
@@ -556,24 +555,23 @@ $('#create-account-btn').click(function(){
 $('.account-slide').bind('click', function(e) {
 	e.preventDefault();
 	
+	$('#account-alias-edit').hide();
+	$('#account-alias-original').show();
+	
 	var data = JSON.parse($(this).children('input').val());
 	
 	$('#detail-account-num').text(data.accountNum);
 	$('#detail-account-alias').text(data.alias);
 	
-	if (data.hasOwnProperty('card')) {
-		$('#card-detail').hide();
-		$('#detail-card-num').text(data.card.cardNum);
-		$('#detail-card-create-dt').text(data.card.cardCreateDt);
-		$('#detail-card-expire-dt').text(data.card.cardExpireDt);
+	if (data.hasOwnProperty('cardInfo')) {
+		$('#no-card').hide();
+		$('#detail-card-num').text(data.cardInfo.cardNum.replace(/(.{4})/g,"$1 "));
+		$('#detail-card-create-dt').text(data.cardInfo.cardCreateDt);
+		$('#detail-card-expire-dt').text(data.cardInfo.cardExpireDt);
 	} else {
 		$('#card-detail').hide();
 	}
 	
-	
-	/*
-	
-	*/
 	$('#detail-account-max').text('');
 	
 	if (data.securityActive + '' == 'false') {
@@ -600,6 +598,7 @@ $('#alias-edit-btn').click(function(){
 	$('#account-alias-edit').show();
 	$('#account-alias-original').hide();
 });
+
 $('#edit-alias-btn').click(function(){
 	
 	if (!$('#edit-alias-input').val()) {
@@ -608,7 +607,7 @@ $('#edit-alias-btn').click(function(){
 	}
 	
 	var newAlias = $('#edit-alias-input').val(),
-		accountNum = $(this).parent().parent().parent().prev().prev().children('span').text();
+		accountNum = $('#detail-account-num').text();
 	
 	$.ajax({
 		url : "${context}/account/update",
@@ -620,6 +619,7 @@ $('#edit-alias-btn').click(function(){
 				$('#account-alias-edit').hide();
 				$('#account-alias-original').show();
 				$('#detail-account-alias').text(newAlias);
+				$('#account-alias').text(newAlias + " INFO");
 			} else {
 				toastr.error('계좌 별명 변경이 실패하였습니다. 다시 시도해주시길 바랍니다.');
 			}
@@ -627,6 +627,41 @@ $('#edit-alias-btn').click(function(){
 	});
 	
 	$('#edit-alias-input').val('');
+	
+});
+
+$('#create-card-btn').click(function(){
+	
+	var accountNum = $('#detail-account-num').text();
+	
+	$.ajax({
+		url : "${context}/account/create/card",
+		method : "POST",
+		data : {"accountNum" : accountNum},
+		success : function(result) {
+			if (result) {
+				
+				toastr.info('카드 개설을 완료하였습니다.');
+				
+				var data = JSON.parse(result);
+				
+				$('#no-card').hide();
+				$('#detail-card-num').text(data.cardNum.replace(/(.{4})/g,"$1 "));
+				$('#detail-card-create-dt').text(data.cardCreateDt);
+				$('#detail-card-expire-dt').text(data.cardExpireDt);
+				$('#card-detail').show();
+				
+				$('#linked-card-exist').text("O");
+				$('#linked-card-exist').css({
+					color: "green",
+					fontWeight: "bold"
+				});
+				
+			} else {
+				toastr.error('카드 개설에 실패하였습니다. 잠시 후 다시 시도해주시길 바랍니다.');
+			}
+		}
+	});
 	
 });
 </script>

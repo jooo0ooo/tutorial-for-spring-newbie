@@ -16,4 +16,6 @@ public interface AccountInfoMapper {
 	public CardInfo getCardInfoByAccountNum(String accountNum);
 	
 	public int updateAccount(HashMap<String, Object> param);
+	
+	public int insertCard(CardInfo card);
 }

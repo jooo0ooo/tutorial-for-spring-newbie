@@ -52,4 +52,19 @@
 		WHERE account_num = #{accountNum}
 	</update>
 	
+	<insert id="insertCard" parameterType="CardInfo">
+		INSERT INTO card_info 
+			(
+				card_num,
+				user_seq,
+				account_num
+			)
+		VALUES
+			(
+				#{cardNum},
+				#{userSeq},
+				#{accountNum}
+			)
+	</insert>
+	
 </mapper>
