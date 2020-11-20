@@ -183,6 +183,9 @@ public class AccountInfoService {
 		BankMoneyBook bmb = (BankMoneyBook) SessionUtil.getValue(SESSION_ATTR_KEY.BANK_MONEY_BOOK);	
 		AccountInfo account = getAccountInfoByAccountNum(bmb.getAccountNum());
 		if (checkPasswordMatch(account, password) && insertBankMoneyBook(bmb) > 0) {
+			
+			getAccountInfoByAccountNum(bmb.getDepositAccountNum());
+			
 			return true;
 		} else {
 			return false;
