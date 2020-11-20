@@ -33,4 +33,10 @@
 		LIMIT 1
 	</select>
 	
+	<select id="getUserInfoByUserSeq" parameterType="int" resultType="UserInfo">
+		SELECT * 
+		FROM user_info 
+		WHERE seq = #{userSeq}
+	</select>
+	
 </mapper>

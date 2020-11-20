@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -28,16 +27,6 @@
 
 a {
 	font-size: 1.5rem;
-}
-
-.forgot-btn {
-	margin-bottom: 0.5rem;
-}
-
-.bg-login-image {
-	background: url("${context}/resources/img/login_mascott.jpg");
-	background-position: center;
-	background-size: cover;
 }
 
 #drawer-btn {
@@ -568,8 +557,10 @@ $('.account-slide').bind('click', function(e) {
 		$('#detail-card-num').text(data.cardInfo.cardNum.replace(/(.{4})/g,"$1 "));
 		$('#detail-card-create-dt').text(data.cardInfo.cardCreateDt);
 		$('#detail-card-expire-dt').text(data.cardInfo.cardExpireDt);
+		$('#card-detail').show();
 	} else {
 		$('#card-detail').hide();
+		$('#no-card').show();
 	}
 	
 	$('#detail-account-max').text('');

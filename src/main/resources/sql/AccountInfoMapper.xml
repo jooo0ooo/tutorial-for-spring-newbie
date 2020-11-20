@@ -38,6 +38,7 @@
 		SELECT *
 		FROM account_info
 		WHERE user_seq = #{userSeq}
+		ORDER BY sort_order
 	</select>
 	
 	<select id="getCardInfoByAccountNum" parameterType="String" resultType="CardInfo">
@@ -66,5 +67,33 @@
 				#{accountNum}
 			)
 	</insert>
+	
+	<insert id="insertBankMoneyBook" parameterType="BankMoneyBook">
+		INSERT INTO bank_money_book 
+			(
+				transaction_type,
+				amount,
+				fee,
+				content,
+				account_num,
+				deposit_account_num
+			)
+		VALUES
+			(
+				#{transactionType}::transaction_type,
+				#{amount},
+				#{fee},
+				#{content},
+				#{accountNum},
+				#{depositAccountNum}
+			)
+	</insert>
+	
+	<select id="getBankMoneyBookBySeq" parameterType="int" resultType="BankMoneyBook">
+		SELECT *
+		FROM bank_money_book
+		WHERE seq = #{seq}
+	</select>
+	
 	
 </mapper>

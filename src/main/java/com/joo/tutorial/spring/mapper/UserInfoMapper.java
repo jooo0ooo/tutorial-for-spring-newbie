@@ -8,4 +8,6 @@ public interface UserInfoMapper {
 	
 	public UserInfo getUserByEmail(String email);
 	
+	public UserInfo getUserInfoByUserSeq(int userSeq);
+	
 }

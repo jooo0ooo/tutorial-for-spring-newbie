@@ -13,8 +13,10 @@ import com.joo.tutorial.bean.UserInfo;
 public class SessionUtil {
 	
 	public enum SESSION_ATTR_KEY {
-		LOGINID,
+		LOGIN_ID,
 		USER_SEQ,
+		USER_INFO,
+		BANK_MONEY_BOOK
 	}
 
 	public static UserInfo getSession() {

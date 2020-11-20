@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.joo.tutorial.bean.AccountInfo;
+import com.joo.tutorial.bean.BankMoneyBook;
 import com.joo.tutorial.bean.CardInfo;
 import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.mapper.AccountInfoMapper;
 import com.joo.tutorial.util.SessionUtil;
+import com.joo.tutorial.util.SessionUtil.SESSION_ATTR_KEY;
 
 @Service
 public class AccountInfoService {
@@ -36,6 +38,10 @@ public class AccountInfoService {
 		}
 		
 		return accountList;
+	}
+	
+	public List<AccountInfo> getAllAccountInfoByUserSeq(int userSeq) {
+		return mapper.getAllAcountInfoByUserSeq(userSeq);
 	}
 	
 	public boolean updateAccount(String alias, String accountNum) {
@@ -163,4 +169,31 @@ public class AccountInfoService {
 		return mapper.getCardInfoByAccountNum(accountNum);
 	}
 	
+	public AccountInfo getAccountInfoByAccountNum(String accountNum) {
+		return mapper.getAccountInfoByAccountNum(accountNum);
+	}
+	
+	public boolean checkPasswordMatch(AccountInfo account, String password) {
+		
+		return bcryptPasswordEncoder.matches(password, account.getPassword());
+		
+	}
+	
+	public boolean confirm(String password) {
+		BankMoneyBook bmb = (BankMoneyBook) SessionUtil.getValue(SESSION_ATTR_KEY.BANK_MONEY_BOOK);	
+		AccountInfo account = getAccountInfoByAccountNum(bmb.getAccountNum());
+		if (checkPasswordMatch(account, password) && insertBankMoneyBook(bmb) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public int insertBankMoneyBook(BankMoneyBook bmb) {
+		return mapper.insertBankMoneyBook(bmb);
+	}
+	
+	public BankMoneyBook getBankMoneyBookBySeq(int seq) {
+		return mapper.getBankMoneyBookBySeq(seq);
+	}
 }

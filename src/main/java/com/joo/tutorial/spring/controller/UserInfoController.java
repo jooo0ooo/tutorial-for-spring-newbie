@@ -21,20 +21,14 @@ public class UserInfoController {
 	@RequestMapping(value = "/login")
 	public void loginPage(String error, String logout, Model model) {
 		
-		if(error != null) { 
-			model.addAttribute("error","로그인 실패"); 
-		} 
-		if(logout != null) { 
-			model.addAttribute("logout","로그아웃"); 
-		}
+		System.out.println("login page");
 		
 		
 	}
 	
 	@PostMapping("/login-processing")
 	public void loginProcessing(String error) {
-		System.out.println("????????????????????????");
-		System.out.println(error);
+		System.out.println("login process page");
 	}
 	
 	@GetMapping("/login-processing")

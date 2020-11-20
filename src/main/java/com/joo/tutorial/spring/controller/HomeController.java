@@ -13,6 +13,7 @@ import com.joo.tutorial.bean.AccountInfo;
 import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.service.AccountInfoService;
 import com.joo.tutorial.util.SessionUtil;
+import com.joo.tutorial.util.SessionUtil.SESSION_ATTR_KEY;
 
 @Controller
 public class HomeController {
@@ -28,6 +29,9 @@ public class HomeController {
 		UserInfo user = SessionUtil.getSession();
 		
 		if(user != null) {
+			
+			SessionUtil.setValue(SESSION_ATTR_KEY.USER_INFO, user);
+			
 			List<AccountInfo> accountList = accountInfoService.getAllAcountNCardInfoByUserSeq(user.getSeq());
 			mav.addObject("accountList", accountList);
 		}

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 .drawer-menu {
 	color: #fff;
@@ -117,11 +117,18 @@
 </button>
 
 <nav id="drawer">
-	<a href="#" class="drawer-menu">Item 1</a>
-	<a href="#" class="drawer-menu">Item 2</a>
-	<a href="#" class="drawer-menu">Item 3</a>
-	<a href="#" class="drawer-menu">Item 4</a>
-	<a href="#" class="drawer-menu logout">Logout</a>
+	<c:choose>
+		<c:when test="${empty sessionScope.USER_INFO}">
+			<a href="${context }/" class="drawer-menu">Main</a>
+			<a href="${context }/user/login" class="drawer-menu">Login</a>
+		</c:when>
+		<c:otherwise>
+			<a href="${context }/" class="drawer-menu">Main</a>
+			<a href="${context }/transfer" class="drawer-menu">Transfer</a>
+			<a href="#" class="drawer-menu">Profile</a>
+			<a href="#" class="drawer-menu logout">Logout</a>
+		</c:otherwise>
+	</c:choose>
 </nav>
 <script>
 </script>

@@ -24,4 +24,8 @@ public class UserInfoService {
 		return mapper.register(users) > 0;
 	}
 	
+	public UserInfo getUserInfoByUserSeq(int userSeq) {
+		return mapper.getUserInfoByUserSeq(userSeq);
+	}
+	
 }
