@@ -79,10 +79,10 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" placeholder="Password">
+                                        <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" placeholder="Repeat Password">
+                                        <input type="password" name="passwordRepeat" class="form-control form-control-user" placeholder="Repeat Password">
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -18,6 +18,12 @@ public class UserInfoService {
 	
 	public boolean register(UserInfo users) {
 		
+		users.setName(users.getLastName() + " " + users.getFirstName());
+		
+		if(!users.getPassword().equals(users.getPasswordRepeat())) {
+			return false;
+		}
+		
 		String endcodedPassword = bcryptPasswordEncoder.encode(users.getPassword());
 		users.setPassword(endcodedPassword);
 		

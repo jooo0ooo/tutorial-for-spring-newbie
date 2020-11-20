@@ -28,6 +28,10 @@ public class UserInfo implements UserDetails {
 	private String auth;
 	private boolean isActive;
 	
+	private String lastName;
+	private String firstName;
+	private String passwordRepeat;
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		ArrayList<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
