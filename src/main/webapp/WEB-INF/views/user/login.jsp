@@ -84,10 +84,8 @@ a {
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         
                                     </form:form>
+                                    
                                     <hr>
-                                    <div class="text-center forgot-btn">
-                                        <a class="" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
                                     <div class="text-center">
                                         <a class="" href="${context}/user/register">Create an Account!</a>
                                     </div>

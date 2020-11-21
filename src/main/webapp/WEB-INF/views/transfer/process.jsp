@@ -69,10 +69,6 @@ html {
 	color: black;
 }
 
-br {
-	line-height: 2.1;
-}
-
 h4 {
 	font-size: 16px;
 	font-weight: bold;

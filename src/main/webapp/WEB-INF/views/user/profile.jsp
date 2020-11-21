@@ -367,7 +367,7 @@ html {
 	
 <div class="card shadow">
 	<div class="card-header py-3">
-		<h4 class="m-0 font-weight-bold text-primary">Account Info <span id="history" style="font-weight: 500;" class="detail-edit-btn">moneybook</span></h4>
+		<h4 class="m-0 font-weight-bold text-primary">Account Info</h4>
 	</div>
 	<div class="card-body">
 		<p class="detail-line">Account Number : <span id="detail-account-num" class="detail-info"></span></p>
@@ -408,8 +408,6 @@ html {
 		
 	</div>
 </div>
-<jsp:include page="account/password.jsp"/>
-<jsp:include page="googleotp/otp.jsp"/>
 <script>
 var windowWidth = $(window).width();
 var contentWidth = $('#content').width();
@@ -459,11 +457,6 @@ var swiper = new Swiper('.swiper-container', {
 });
 
 $('#no-account').bind('click', function(e) {
-	
-	<c:if test="${empty sessionScope.USER_INFO}">
-		location.href="${context}/user/login";
-	</c:if>
-	
 	e.preventDefault();
 	
 	$('input[name="account-num"]').val('');
@@ -660,23 +653,6 @@ $('#create-card-btn').click(function(){
 		}
 	});
 	
-});
-
-$('#security-upgrade-btn').click(function(){
-	$.ajax({
-		url : "${context}/otp/create",
-		method : "POST",
-		success : function(result) {
-			if (result) {
-				$('#otp-qr').attr("src", result);
-				$('#otp-modal').show('');
-			}
-		}
-	});
-});
-
-$('#history').click(function(){
-	location.href="${context}/transfer/history/" + $('#detail-account-num').text();
 });
 </script>
 </body>

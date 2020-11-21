@@ -199,4 +199,12 @@ public class AccountInfoService {
 	public BankMoneyBook getBankMoneyBookBySeq(int seq) {
 		return mapper.getBankMoneyBookBySeq(seq);
 	}
+	
+	public boolean upgradeSecurityLevel(String accountNum) {
+		return mapper.upgradeSecurityLevel(accountNum) > 0;
+	}
+	
+	public List<BankMoneyBook> getTransferHistory(String accountNum) {
+		return mapper.getTransferHistory(accountNum);
+	}
 }

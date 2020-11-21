@@ -20,4 +20,6 @@ public class BankMoneyBook {
 	Date createDt;
 	
 	String receiverName;
+	boolean mine;
+	String balanceChange;
 }

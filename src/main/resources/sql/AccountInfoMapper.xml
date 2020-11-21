@@ -95,5 +95,26 @@
 		WHERE seq = #{seq}
 	</select>
 	
+	<update id="upgradeSecurityLevel" parameterType="String">
+		UPDATE account_info
+		SET security_active = TRUE
+		WHERE account_num = #{accountNum}
+	</update>	
+	
+	<select id="getTransferHistory" parameterType="String" resultType="BankMoneyBook">
+		SELECT bmb.*, true AS mine,
+			CASE WHEN amount > 0 THEN 'minus' ELSE 'plus' END AS balance_change
+		FROM bank_money_book AS bmb
+		LEFT JOIN account_info AS a ON bmb.account_num = a.account_num
+		WHERE a.account_num = #{accountNum}
+		
+		UNION ALL
+		
+		SELECT bmb.*, false AS mine,
+			CASE WHEN amount > 0 THEN 'plus' ELSE 'minus' END AS balance_change
+		FROM bank_money_book AS bmb
+		LEFT JOIN account_info AS a ON bmb.deposit_account_num = a.account_num
+		WHERE a.account_num = #{accountNum}
+	</select>
 	
 </mapper>

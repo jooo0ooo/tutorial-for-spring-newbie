@@ -24,4 +24,7 @@ public interface AccountInfoMapper {
 	
 	public BankMoneyBook getBankMoneyBookBySeq(int seq);
 	
+	public int upgradeSecurityLevel(String accountNum);
+	
+	public List<BankMoneyBook> getTransferHistory(String accountNum);
 }

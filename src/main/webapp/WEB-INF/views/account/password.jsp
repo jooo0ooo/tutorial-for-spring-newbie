@@ -46,10 +46,9 @@
 					<div class="" style="margin-top: 40px;">
 						<p class="text-center" style="font-size: 20px; font-weight: bold;">
 							비밀번호<br/>
-							<span id="reset-password" style="font-size: 12px; text-decoration: underline; color: #00e5ff; font-weight: normal;">클릭</span>
 						</p>
 					</div>
-			
+					
 					<div class="" style="margin-top: 15px; margin-bottom: 15px; text-align: center; height: 72px; line-height: 50px;">
 						<div class="password">
 							<span class="pw-digit" id="digit-1"></span><br/>
