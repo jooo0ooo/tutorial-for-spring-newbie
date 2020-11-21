@@ -332,7 +332,7 @@ html {
 <div id="create-account-modal" class="main-modal">
 	<a class="b-close">x</a>
 	<div>
-		<div><label>희망 계좌 번호 뒷자리</label></div>
+		<div><label>he back seat of the desired account</label></div>
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text account-input" id="fix-num">MJ{d}{d}</span>
@@ -345,12 +345,12 @@ html {
 			</div>
 		</div>
 		
-		<div><label>계좌 별명 (8글자까지)</label></div>
+		<div><label>Account alias (up to 8 characters)</label></div>
 		<div class="input-group mb-3">
 			<input type="text" class="form-control account-input" placeholder="Account Alias" name="account-alias" maxlength="8">
 		</div>
 		
-		<div><label>계좌 비밀번호</label></div>
+		<div><label>Account Password</label></div>
 		<div class="input-group mb-3">
 			<input type="password" class="form-control account-input" placeholder="Account Password" name="account-password" disabled>
 			<div class="input-group-append">
@@ -483,7 +483,7 @@ $('#check-btn').click(function(){
 	var accountNum = $('input[name="account-num"]').val();
 	
 	if(accountNum == 'RANDOM') {
-		toastr.info('RANDOM 생성의 경우는 번호 검증하지 않으셔도 됩니다.');
+		toastr.info('For RANDOM generation, you do not need to verify the number.');
 		return;
 	}
 	
@@ -494,15 +494,15 @@ $('#check-btn').click(function(){
 			data : {"accountNum" : accountNum},
 			success : function(result) {
 				if (result == false) {
-					toastr.info('사용 가능한 계좌번호입니다.');
+					toastr.info('This account number is available.');
 					$('#checkedAccountNum').val(accountNum);
 				} else {
-					toastr.error('이미 사용중인 계좌번호 입니다. 다른 번호로 설정 부탁드립니다.');
+					toastr.error('This account number is already in use. Please set it to a different number.');
 				}
 			}
 		});
 	} else {
-		toastr.error('숫자 6자리만 입력해 주십시오.');
+		toastr.error('Please enter only 6 digits.');
 	}
 	
 });
@@ -517,12 +517,12 @@ $('#create-account-btn').click(function(){
 	var checkedAccountNum = $('#checkedAccountNum').val();
 	
 	if (!$('input[name="account-num"]').val() || !(accountNum == 'RANDOM' || accountNum == checkedAccountNum)) {
-		toastr.error('희망 계좌를 설정 및 검증 부탁드립니다.');
+		toastr.error('Please set up and verify the desired account.');
 		return;
 	}
 	
 	if (!$('input[name="account-password"]').val()) {
-		toastr.error('계좌 비밀번호를 설정 부탁드립니다.');
+		toastr.error('Please set the account password.');
 		return;
 	}
 	
@@ -532,12 +532,12 @@ $('#create-account-btn').click(function(){
 		data : {"accountNum" : accountNum, "alias" : $('input[name="account-alias"]').val(), "password" : $('input[name="account-password"]').val()},
 		success : function(result) {
 			if (result == true) {
-				toastr.info('계좌 개설을 성공적으로 마쳤습니다.');
+				toastr.info('You have successfully opened your account.');
 				setTimeout(function(){
 					location.reload();
 				}, 2000);					
 			} else {
-				toastr.error('시스템 오류. 잠시 후 다시 개설해주시길 부탁드립니다.');
+				toastr.error('System error. Please re-open it later.');
 				setTimeout(function(){
 					location.reload();
 				}, 2000);
@@ -599,7 +599,7 @@ $('#alias-edit-btn').click(function(){
 $('#edit-alias-btn').click(function(){
 	
 	if (!$('#edit-alias-input').val()) {
-		toastr.error('변경할 계좌 별명을 입력해 주십시오.');
+		toastr.error('Please enter an account nickname to change.');
 		return;
 	}
 	
@@ -612,13 +612,13 @@ $('#edit-alias-btn').click(function(){
 		data : {"alias" : newAlias, "accountNum" : accountNum},
 		success : function(result) {
 			if (result == true) {
-				toastr.info('계좌 별명을 변경하였습니다.');
+				toastr.info('You have changed your account nickname.');
 				$('#account-alias-edit').hide();
 				$('#account-alias-original').show();
 				$('#detail-account-alias').text(newAlias);
 				$('#account-alias').text(newAlias + " INFO");
 			} else {
-				toastr.error('계좌 별명 변경이 실패하였습니다. 다시 시도해주시길 바랍니다.');
+				toastr.error('Account nickname change failed. Please try again.');
 			}
 		}
 	});
@@ -638,7 +638,7 @@ $('#create-card-btn').click(function(){
 		success : function(result) {
 			if (result) {
 				
-				toastr.info('카드 개설을 완료하였습니다.');
+				toastr.info('You have completed opening the card.');
 				
 				var data = JSON.parse(result);
 				
@@ -655,7 +655,7 @@ $('#create-card-btn').click(function(){
 				});
 				
 			} else {
-				toastr.error('카드 개설에 실패하였습니다. 잠시 후 다시 시도해주시길 바랍니다.');
+				toastr.error('Failed to open card. Please try again in a momentarily.');
 			}
 		}
 	});

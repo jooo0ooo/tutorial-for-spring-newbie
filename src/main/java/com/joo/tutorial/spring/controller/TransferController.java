@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.joo.tutorial.bean.AccountInfo;
 import com.joo.tutorial.bean.BankMoneyBook;
-import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.enums.TransactionType;
 import com.joo.tutorial.spring.service.AccountInfoService;
 import com.joo.tutorial.spring.service.UserInfoService;

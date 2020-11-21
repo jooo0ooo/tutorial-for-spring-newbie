@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.joo.tutorial.bean.AccountInfo;
 import com.joo.tutorial.bean.BankMoneyBook;
 import com.joo.tutorial.bean.CardInfo;
-import com.joo.tutorial.bean.UserInfo;
 import com.joo.tutorial.spring.mapper.AccountInfoMapper;
 import com.joo.tutorial.util.SessionUtil;
 import com.joo.tutorial.util.SessionUtil.SESSION_ATTR_KEY;

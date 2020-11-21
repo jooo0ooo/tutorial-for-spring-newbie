@@ -45,7 +45,7 @@
 					<br/>
 					<div class="" style="margin-top: 40px;">
 						<p class="text-center" style="font-size: 20px; font-weight: bold;">
-							비밀번호<br/>
+							Password<br/>
 						</p>
 					</div>
 					

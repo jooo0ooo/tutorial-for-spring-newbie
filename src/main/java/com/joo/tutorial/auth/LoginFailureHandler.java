@@ -25,22 +25,22 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
 			AuthenticationException exception) throws IOException, ServletException {
 		
 		if (exception instanceof AuthenticationServiceException) {
-			request.setAttribute("loginFailMsg", "존재하지 않는 사용자입니다.");
+			request.setAttribute("loginFailMsg", "User does not exist.");
 		
 		} else if(exception instanceof BadCredentialsException) {
-			request.setAttribute("loginFailMsg", "아이디 또는 비밀번호가 틀립니다.");
+			request.setAttribute("loginFailMsg", "Wrong ID or password.");
 			
 		} else if(exception instanceof LockedException) {
-			request.setAttribute("loginFailMsg", "잠긴 계정입니다..");
+			request.setAttribute("loginFailMsg", "This account is locked.");
 			
 		} else if(exception instanceof DisabledException) {
-			request.setAttribute("loginFailMsg", "비활성화된 계정입니다..");
+			request.setAttribute("loginFailMsg", "This account has been deactivated.");
 			
 		} else if(exception instanceof AccountExpiredException) {
-			request.setAttribute("loginFailMsg", "만료된 계정입니다..");
+			request.setAttribute("loginFailMsg", "Your account has expired.");
 			
 		} else if(exception instanceof CredentialsExpiredException) {
-			request.setAttribute("loginFailMsg", "비밀번호가 만료되었습니다.");
+			request.setAttribute("loginFailMsg", "Your password has expired.");
 		}
 		
 		// 로그인 페이지로 다시 포워딩

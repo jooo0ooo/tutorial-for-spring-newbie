@@ -186,7 +186,7 @@ $('#drawer-btn').on('click', function() {
 $(function() {
 	$('#check-receiver').click(function() {
 		if($('#receiver').val().length < 10) {
-			toastr.error("10글자 입력하세요.");
+			toastr.error("Please enter 10 letters.");
 			return;
 		}
 		
@@ -202,7 +202,7 @@ $(function() {
 					$('#receiver-account').text($('#receiver').val());
 					$('#receiver-name').text(result);
 				} else {
-					toastr.error("존재하지 않는 계좌입니다.");
+					toastr.error("This account does not exist.");
 				}
 				
 			}
@@ -224,7 +224,7 @@ $(function() {
 	
 	$('#transfer').click(function() {
 		if ($('#receiver-verify').val() != 'verified') {
-			toastr.error("수취인 계좌 확인 해주십시오.");
+			toastr.error("Please check the recipient account.");
 			return;
 		}
 		
@@ -239,7 +239,7 @@ $(function() {
 					$('#password-input-modal').modal('show');
 					
 				} else {
-					toastr.error("잠시 후 다시 시도해주시길 바랍니다.");
+					toastr.error("Please try again in a momentarily.");
 				}
 				
 			}

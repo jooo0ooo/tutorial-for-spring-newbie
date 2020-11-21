@@ -45,7 +45,7 @@
 					<br/>
 					<div class="" style="margin-top: 40px;">
 						<p class="text-center" style="font-size: 20px; font-weight: bold;">
-							비밀번호<br/>
+							Password<br/>
 						</p>
 					</div>
 			
@@ -162,7 +162,7 @@ $('.digit').click(function() {
 						if (result) {
 							location.href="${context}/transfer/result";
 						} else {
-							toastr.error("비밀번호가 일치하지 않습니다.");
+							toastr.error("Passwords do not match.");
 							$('#password').val('');
 							for(var i = 6; i >= 1; i--) {
 								removeStar(i);
