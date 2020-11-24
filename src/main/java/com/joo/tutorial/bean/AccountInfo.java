@@ -9,7 +9,7 @@ import lombok.Data;
 public class AccountInfo {
 	
 	String accountNum;
-	int userSeq;
+	String idNumber;
 	BigInteger balance;
 	String password;
 	String alias;

@@ -15,7 +15,7 @@ public class UserInfo implements UserDetails {
 	
 	private static final long serialVersionUID = 3297383149578717638L;
 	
-	private int seq;
+	private String idNumber;
 	private String email;
 	private String password;
 	private String name;
@@ -25,8 +25,8 @@ public class UserInfo implements UserDetails {
 	private String address;
 	private Date createDt;
 	private Date updateDt;
-	private String auth;
-	private boolean isActive;
+	private String auth;	
+	private boolean enabled;
 	
 	private String lastName;
 	private String firstName;
@@ -56,11 +56,12 @@ public class UserInfo implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return isActive;
+		return enabled;
 	}
 
 	@Override
 	public String getUsername() {
 		return name;
 	}
+	
 }

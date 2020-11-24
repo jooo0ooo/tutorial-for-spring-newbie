@@ -73,13 +73,6 @@ a {
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
                                         <input class="btn btn-primary btn-user btn-block" type="submit" value="Login">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         

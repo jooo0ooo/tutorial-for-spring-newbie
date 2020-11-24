@@ -30,8 +30,12 @@ public class UserInfoService {
 		return mapper.register(users) > 0;
 	}
 	
-	public UserInfo getUserInfoByUserSeq(int userSeq) {
-		return mapper.getUserInfoByUserSeq(userSeq);
+	public UserInfo getUserInfoByIdNumber(String idNumber) {
+		return mapper.getUserInfoByIdNumber(idNumber);
+	}
+	
+	public boolean isAlreadyExistUser(UserInfo user) {
+		return mapper.isAlreadyExistUser(user);
 	}
 	
 }

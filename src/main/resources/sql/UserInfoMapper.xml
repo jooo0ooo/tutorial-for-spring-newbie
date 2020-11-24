@@ -6,6 +6,7 @@
 	<insert id="register" parameterType="UserInfo">
 		INSERT INTO user_info 
 			(
+				id_number,
 				email,
 				password,
 				name,
@@ -16,6 +17,7 @@
 			)
 		VALUES
 			(
+				#{idNumber},
 				#{email},
 				#{password},
 				#{name},
@@ -33,10 +35,20 @@
 		LIMIT 1
 	</select>
 	
-	<select id="getUserInfoByUserSeq" parameterType="int" resultType="UserInfo">
+	<select id="getUserInfoByIdNumber" parameterType="String" resultType="UserInfo">
 		SELECT * 
 		FROM user_info 
-		WHERE seq = #{userSeq}
+		WHERE id_number = #{idNumber}
+	</select>
+	
+	<select id="isAlreadyExistUser" parameterType="UserInfo" resultType="boolean">
+		SELECT EXISTS 
+			(
+				SELECT 1
+				FROM user_info
+				WHERE id_number = #{idNumber}
+					OR email = #{email}
+			)
 	</select>
 	
 </mapper>

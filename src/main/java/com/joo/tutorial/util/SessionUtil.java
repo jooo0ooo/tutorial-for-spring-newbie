@@ -14,7 +14,7 @@ public class SessionUtil {
 	
 	public enum SESSION_ATTR_KEY {
 		LOGIN_ID,
-		USER_SEQ,
+		USER_ID_NUMBER,
 		USER_INFO,
 		BANK_MONEY_BOOK
 	}
@@ -37,9 +37,9 @@ public class SessionUtil {
 		}
 	}
 
-	public static int getUserSeq() {
+	public static String getUserIdNumber() {
 		UserInfo user = getSession();
-		return user == null ? 0 : user.getSeq();
+		return user == null ? null : user.getIdNumber();
 	}
 
 	public static void setValue(SESSION_ATTR_KEY key, Object obj) {

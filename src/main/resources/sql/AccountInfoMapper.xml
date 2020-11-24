@@ -3,17 +3,17 @@
 
 <mapper namespace="com.joo.tutorial.spring.mapper.AccountInfoMapper">
 	
-	<select id="getAccountCountByUserSeq" parameterType="int" resultType="int">
+	<select id="getAccountCountByIdNumber" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		FROM account_info
-		WHERE user_seq = #{userSeq}
+		WHERE id_number = #{idNumber}
 	</select>
 	
 	<insert id="insertAccount" parameterType="AccountInfo">
 		INSERT INTO account_info 
 			(
 				account_num,
-				user_seq,
+				id_number,
 				password,
 				alias,
 				sort_order
@@ -21,7 +21,7 @@
 		VALUES
 			(
 				#{accountNum},
-				#{userSeq},
+				#{idNumber},
 				#{password},
 				#{alias},
 				#{sortOrder}
@@ -34,10 +34,10 @@
 		WHERE account_num = #{accountNum}
 	</select>
 	
-	<select id="getAllAcountInfoByUserSeq" parameterType="int" resultType="AccountInfo">
+	<select id="getAllAcountInfoByIdNumber" parameterType="String" resultType="AccountInfo">
 		SELECT *
 		FROM account_info
-		WHERE user_seq = #{userSeq}
+		WHERE id_number = #{idNumber}
 		ORDER BY sort_order
 	</select>
 	
@@ -57,13 +57,11 @@
 		INSERT INTO card_info 
 			(
 				card_num,
-				user_seq,
 				account_num
 			)
 		VALUES
 			(
 				#{cardNum},
-				#{userSeq},
 				#{accountNum}
 			)
 	</insert>
@@ -102,19 +100,28 @@
 	</update>	
 	
 	<select id="getTransferHistory" parameterType="String" resultType="BankMoneyBook">
-		SELECT bmb.*, true AS mine,
-			CASE WHEN amount > 0 THEN 'minus' ELSE 'plus' END AS balance_change
+		SELECT bmb.*, TRUE AS mine, 'minus' AS balance_change
 		FROM bank_money_book AS bmb
 		LEFT JOIN account_info AS a ON bmb.account_num = a.account_num
+		WHERE a.account_num = #{accountNum}
+			AND transaction_type != 'DEPOSIT'
+		
+		UNION ALL
+		
+		SELECT bmb.*, FALSE AS mine, 'plus' AS balance_change
+		FROM bank_money_book AS bmb
+		LEFT JOIN account_info AS a ON bmb.deposit_account_num = a.account_num
 		WHERE a.account_num = #{accountNum}
 		
 		UNION ALL
 		
-		SELECT bmb.*, false AS mine,
-			CASE WHEN amount > 0 THEN 'plus' ELSE 'minus' END AS balance_change
+		SELECT bmb.*, TRUE AS mine, 'plus' AS balance_change
 		FROM bank_money_book AS bmb
-		LEFT JOIN account_info AS a ON bmb.deposit_account_num = a.account_num
+		LEFT JOIN account_info AS a ON bmb.account_num = a.account_num
 		WHERE a.account_num = #{accountNum}
+			AND transaction_type = 'DEPOSIT'
+			
+		ORDER BY seq DESC
 	</select>
 	
 </mapper>

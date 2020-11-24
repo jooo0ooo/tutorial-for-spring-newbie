@@ -125,7 +125,7 @@
 		<c:otherwise>
 			<a href="${context }/" class="drawer-menu">Main</a>
 			<a href="${context }/transfer" class="drawer-menu">Transfer</a>
-			<a href="#" class="drawer-menu">Profile</a>
+			<a href="${context }/money/move" class="drawer-menu">Money Move</a>
 			<a href="#" class="drawer-menu logout">Logout</a>
 		</c:otherwise>
 	</c:choose>

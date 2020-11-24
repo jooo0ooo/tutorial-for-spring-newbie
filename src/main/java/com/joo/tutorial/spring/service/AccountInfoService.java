@@ -25,9 +25,9 @@ public class AccountInfoService {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	public List<AccountInfo> getAllAcountNCardInfoByUserSeq(int userSeq) {
+	public List<AccountInfo> getAllAcountNCardInfoByIdNumber(String idNumber) {
 		
-		List<AccountInfo> accountList = mapper.getAllAcountInfoByUserSeq(userSeq);
+		List<AccountInfo> accountList = mapper.getAllAcountInfoByIdNumber(idNumber);
 		
 		for(AccountInfo account : accountList) {
 			CardInfo card = mapper.getCardInfoByAccountNum(account.getAccountNum());
@@ -39,8 +39,8 @@ public class AccountInfoService {
 		return accountList;
 	}
 	
-	public List<AccountInfo> getAllAccountInfoByUserSeq(int userSeq) {
-		return mapper.getAllAcountInfoByUserSeq(userSeq);
+	public List<AccountInfo> getAllAccountInfoByIdNumber(String idNumber) {
+		return mapper.getAllAcountInfoByIdNumber(idNumber);
 	}
 	
 	public boolean updateAccount(String alias, String accountNum) {
@@ -54,7 +54,7 @@ public class AccountInfoService {
 	
 	public synchronized AccountInfo makeAccount(AccountInfo account) {
 		
-		int existAccountCount = mapper.getAccountCountByUserSeq(account.getUserSeq());
+		int existAccountCount = mapper.getAccountCountByIdNumber(account.getIdNumber());
 		account.setSortOrder(existAccountCount);
 		
 		String accountNum = null;
@@ -156,7 +156,6 @@ public class AccountInfoService {
 		
 		CardInfo card = new CardInfo();
 		card.setCardNum(generateCardNumInGeneralFormat(accountNum, SessionUtil.getSession().getPhone()));
-		card.setUserSeq(SessionUtil.getUserSeq());
 		card.setAccountNum(accountNum);
 		
 		mapper.insertCard(card);

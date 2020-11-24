@@ -269,7 +269,7 @@ html {
 			<div class="block-for-array col-md-3 mb-4"></div>
 			<div class="col-xl-3 col-md-6 mb-4">
 				<div class="card border-left-success shadow h-100 py-2 card-btn">
-					<div class="card-body">
+					<div class="card-body" onClick="location.href='mailto:pingrae@me.com'">
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">DM</div>
@@ -289,7 +289,7 @@ html {
 			<div class="middle-block-for-array col-xl-3 col-md-3 mb-4"></div>
 			<div class="col-xl-3 col-md-6 mb-4">
 				<div class="card border-left-info shadow h-100 py-2 card-btn">
-					<div class="card-body">
+					<div class="card-body" onClick="location.href='tel:010-0000-0000'">
 						<div class="row no-gutters align-items-center">
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Hotline</div>
@@ -572,6 +572,7 @@ $('.account-slide').bind('click', function(e) {
 	$('#detail-account-max').text('');
 	
 	if (data.securityActive + '' == 'false') {
+		$('#detail-account-max').text('1,000,000');
 		$('#security-upgrade-btn').show();
 		$('#detail-account-security').text("X");
 		$('#detail-account-security').css({
@@ -579,6 +580,7 @@ $('.account-slide').bind('click', function(e) {
 			fontWeight: "bold"
 		});
 	} else {
+		$('#detail-account-max').text('1,000,000,000,000');
 		$('#detail-account-security').text("O");
 		$('#detail-account-security').css({
 			color: "green",

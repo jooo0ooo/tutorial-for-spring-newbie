@@ -42,13 +42,13 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/register")
-	public String registerProcess(UserInfo users) {
+	public String registerProcess(UserInfo user) {
 		
-		if (userInfoService.register(users)) {
+		if (!userInfoService.isAlreadyExistUser(user) && userInfoService.register(user)) {
 			return "redirect:/user/login";
 		}
-		
-		return "redirect:/user/register";
+
+		return "redirect:/user/register"+ "?failed";
 		
 	}
 	

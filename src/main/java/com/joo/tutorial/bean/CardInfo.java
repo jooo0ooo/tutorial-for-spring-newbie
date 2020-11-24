@@ -8,7 +8,6 @@ import lombok.Data;
 public class CardInfo {
 	
 	String cardNum;
-	int userSeq;
 	String accountNum;
 	Date createDt;
 	Date updateDt;

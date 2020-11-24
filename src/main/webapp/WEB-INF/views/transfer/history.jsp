@@ -129,7 +129,12 @@ span {
 									<c:choose>
 										<c:when test="${item.mine eq true}">
 											<span class="account-num">${item.accountNum }</span>
-											<span class="amount" style="float: right;">-<fmt:formatNumber value="${item.amount}" pattern="#,###"/> KRW</span>
+											<span class="amount" style="float: right;">
+												<c:if test="${item.balanceChange eq 'minus'}">
+													-
+												</c:if>
+												<fmt:formatNumber value="${item.amount}" pattern="#,###"/> KRW
+											</span>
 										</c:when>
 										<c:otherwise>
 											<span class="account-num">${item.depositAccountNum }</span>

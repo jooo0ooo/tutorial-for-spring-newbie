@@ -42,7 +42,7 @@ public class TransferController {
 		
 		SessionUtil.removeValue(SESSION_ATTR_KEY.BANK_MONEY_BOOK);
 		
-		List<AccountInfo> accountList = accountInfoService.getAllAccountInfoByUserSeq(SessionUtil.getUserSeq());
+		List<AccountInfo> accountList = accountInfoService.getAllAccountInfoByIdNumber(SessionUtil.getUserIdNumber());
 		
 		mav.addObject("bankFee", "1,000");
 		mav.addObject("max", 1_000_000);
@@ -81,7 +81,7 @@ public class TransferController {
 	public String check(String accountNum) {
 		AccountInfo account = accountInfoService.getAccountInfoByAccountNum(accountNum);
 		if (account != null) {
-			return userInfoServic.getUserInfoByUserSeq(account.getUserSeq()).getName();		
+			return userInfoServic.getUserInfoByIdNumber(account.getIdNumber()).getName();		
 		} else {
 			return null;
 		}

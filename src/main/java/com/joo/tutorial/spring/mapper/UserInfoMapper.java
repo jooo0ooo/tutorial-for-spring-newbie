@@ -8,6 +8,7 @@ public interface UserInfoMapper {
 	
 	public UserInfo getUserByEmail(String email);
 	
-	public UserInfo getUserInfoByUserSeq(int userSeq);
+	public UserInfo getUserInfoByIdNumber(String idNumber);
 	
+	public boolean isAlreadyExistUser(UserInfo user);
 }

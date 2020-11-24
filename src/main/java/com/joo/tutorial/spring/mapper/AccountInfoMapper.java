@@ -9,11 +9,11 @@ import com.joo.tutorial.bean.CardInfo;
 
 public interface AccountInfoMapper {
 	
-	public int getAccountCountByUserSeq(int userSeq);	
+	public int getAccountCountByIdNumber(String idNumber);	
 	public int insertAccount(AccountInfo account);
 	public AccountInfo getAccountInfoByAccountNum(String accountNum);
 	
-	public List<AccountInfo> getAllAcountInfoByUserSeq(int userSeq);
+	public List<AccountInfo> getAllAcountInfoByIdNumber(String idNumber);
 	public CardInfo getCardInfoByAccountNum(String accountNum);
 	
 	public int updateAccount(HashMap<String, Object> param);

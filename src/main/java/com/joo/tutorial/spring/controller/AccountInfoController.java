@@ -42,7 +42,7 @@ public class AccountInfoController {
 			account.setAccountNum(null);
 		}
 		
-		account.setUserSeq(SessionUtil.getUserSeq());
+		account.setIdNumber(SessionUtil.getUserIdNumber());
 		
 		return accountInfoService.makeAccount(account) != null ? true : null;
 		

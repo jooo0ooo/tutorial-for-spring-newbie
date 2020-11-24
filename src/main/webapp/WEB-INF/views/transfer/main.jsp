@@ -205,6 +205,7 @@ span {
 						</c:choose>
 					</div>
 					<input type="hidden" value="${item.accountNum }">
+					<input type="hidden" value="${item.securityActive }">
 					<hr class="" style="border-color:#ebebeb; margin: 0px 10px;"/>
 				</c:forEach>
 			</div>
@@ -252,6 +253,7 @@ $('#drawer-btn').on('click', function() {
 $(function() {
 	
 	var selectedAccount = $('.active').parent().next().val();
+	var securityActive = $('.active').parent().next().next().val();
 	
 	$('#selected-account').html($('.active').prev().children('span').last().text().replace(" ", "<br>"));
 	
@@ -298,11 +300,16 @@ $(function() {
 		$('#after-balance').text(comma(afterBalance));
 	    
 	}).on("keyup", function() {
-	    
+		var max = 1000000;
+		var flag = securityActive + ''
+		if(flag == 'true') {
+			max = 1000000000000;
+		}
+		
 		var bankFee = Number(uncomma("${bankFee}"));
-		if (Number(uncomma($(this).val())) + bankFee > ${max}) {
+		if (Number(uncomma($(this).val())) + bankFee > max) {
 			toastr.error('Exceeding the limit amount');
-			$(this).val(comma(${max} - bankFee));
+			$(this).val(comma(max - bankFee));
 		}
 		
 		$(this).val($(this).val().replace(/[^0-9]/g,""));
@@ -327,7 +334,7 @@ $(function() {
 		$('#after-balance').text(comma(afterBalance));
 		
 		if(afterBalance < 0) {
-			toastr.error("최소 금액 0원");
+			toastr.error("Check Balance");
 			$('#input-amount').val("");
 			$('#sending-amount-summary').text("0");
 			$('#total-amount').text("0");
@@ -373,6 +380,7 @@ $(function() {
 		} else {
 			
 			selectedAccount = $(this).next().val();
+			securityActive = $(this).next().next().val();
 			
 			$('#selected-account').html($(this).children('div').children('span').last().text().replace(" ", "<br>"));
 			
@@ -383,7 +391,7 @@ $(function() {
 			$('#after-balance').text(comma(afterBalance));
 			
 			if(afterBalance < 0) {
-				toastr.error("최소 금액 0원");
+				toastr.error("Check Balance");
 				$('#input-amount').val("");
 				$('#sending-amount-summary').text("0");
 				$('#total-amount').text("0");
